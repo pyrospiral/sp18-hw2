@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.lang.*;
 
 public class GlobeSortClient {
 
@@ -40,7 +41,11 @@ public class GlobeSortClient {
 
     public void run(Integer[] values) throws Exception {
         System.out.println("Pinging " + serverStr + "...");
+        System.out.print("Client Time before ping = ");
+        System.out.println(System.currentTimeMillis());
         serverStub.ping(Empty.newBuilder().build());
+        System.out.print("Client Time after ping = ");
+        System.out.println(System.currentTimeMillis());
         System.out.println("Ping successful.");
 
         System.out.println("Requesting server to sort array");
@@ -92,7 +97,11 @@ public class GlobeSortClient {
 
         GlobeSortClient client = new GlobeSortClient(cmd_args.getString("server_ip"), cmd_args.getInt("server_port"));
         try {
-            client.run(values);
+            System.out.print("Client Time before sending = ");
+            System.out.println(System.currentTimeMillis());
+            client.run(values);            
+            System.out.print("Client Time after receiving = ");
+            System.out.println(System.currentTimeMillis());
         } finally {
             client.shutdown();
         }

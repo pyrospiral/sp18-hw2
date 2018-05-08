@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
+import java.Lang.*;
 
 public class GlobeSortServer {
     private Server server;
@@ -86,6 +87,8 @@ public class GlobeSortServer {
 
         @Override
         public void sortIntegers(IntArray req, final StreamObserver<IntArray> responseObserver) {
+            System.out.print("Server Time before recieving = ");
+            System.out.println(System.currentTimeMillis());
             Integer[] values = req.getValuesList().toArray(new Integer[req.getValuesList().size()]);
             Arrays.sort(values);
             IntArray.Builder responseBuilder = IntArray.newBuilder();
@@ -95,6 +98,8 @@ public class GlobeSortServer {
             IntArray response = responseBuilder.build();
             responseObserver.onNext(response);
             responseObserver.onCompleted();
+            System.out.print("Server Time after sending = ");
+            System.out.println(System.currentTimeMillis());
         }
     }
 }
