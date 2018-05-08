@@ -43,9 +43,15 @@ public class GlobeSortClient {
         System.out.println("Pinging " + serverStr + "...");
         System.out.print("Client Time before ping = ");
         System.out.println(System.currentTimeMillis());
+        long pb = System.currentTimeMillis();
         serverStub.ping(Empty.newBuilder().build());
         System.out.print("Client Time after ping = ");
         System.out.println(System.currentTimeMillis());
+        long pa = System.currentTimeMillis();
+
+        System.out.print("Client ping diff = ");
+        System.out.println(pa-pb);
+
         System.out.println("Ping successful.");
 
         System.out.println("Requesting server to sort array");
@@ -99,9 +105,13 @@ public class GlobeSortClient {
         try {
             System.out.print("Client Time before sending = ");
             System.out.println(System.currentTimeMillis());
+            long tb = System.currentTimeMillis();
             client.run(values);            
             System.out.print("Client Time after receiving = ");
             System.out.println(System.currentTimeMillis());
+            long ta = System.currentTimeMillis();
+            System.out.print("Client diff = ");
+            System.out.println(ta-tb);
         } finally {
             client.shutdown();
         }
