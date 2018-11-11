@@ -1,3 +1,6 @@
+Implements gRPC framework, to write a wide-area distributed application for simple sorting with code pushed to datacenters on four continents for measuring the resulting performance of the application.
+
+
 Compiling protobufs:
 `mvn protobuf:compile protobuf:compile-custom`
 
